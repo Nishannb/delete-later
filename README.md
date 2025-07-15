@@ -1,4 +1,4 @@
-### 42 Exam Rank 03
+# 42 Exam Rank 03
 
 This repository contains solutions for 42 School's Exam Rank 03, organized by difficulty levels.
 
