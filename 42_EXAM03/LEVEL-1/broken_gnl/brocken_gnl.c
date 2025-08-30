@@ -1,6 +1,7 @@
 #include <stdlib.h>
 #include <string.h>
 #include <unistd.h>
+#include <stdio.h>
 
 #ifndef BUFFER_SIZE
 # define BUFFER_SIZE 42
@@ -27,10 +28,11 @@ char    *ft_strdup(const char *str)
 char    *get_next_line(int fd)
 {
     static char    buffer[BUFFER_SIZE];
-    char        line[70000];
+    char        *line = malloc( BUFFER_SIZE + 1);
     static int    b_read;
     static int    b_pos;
     int            i;
+    int loop;
 
     i = 0;
     if (fd < 0 || BUFFER_SIZE < 1)
@@ -55,10 +57,13 @@ char    *get_next_line(int fd)
 }
 
 #include <fcntl.h>
-int main(){
-    int fd = open("file.txt", O_RDWR);
-    printf("%s", get_next_line(fd));
-    printf("%s", get_next_line(fd));
-    printf("%s", get_next_line(fd));
-    printf("%s", get_next_line(fd));
+int main( int argc, char **argv){
+    if (argc != 2)
+        return (1);
+    int fd = open(argv[1], O_RDWR);
+    printf("%s\n", get_next_line(fd));
+    printf("%s\n", get_next_line(fd));
+    // get_next_line(fd);
+    // get_next_line(fd);
+    // get_next_line(fd);
 }
