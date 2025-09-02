@@ -84,6 +84,7 @@ int        main(int ac, char **av)
         return 1;
     }
 
+    
     size = file_size(file);//
     if (size == -1)
     {
