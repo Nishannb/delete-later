@@ -24,6 +24,7 @@ int check_int(char **str, int ac)
 void solve(int *nums, int size, int target, int *subset, int index, int sub_size, int curr_sum){
 	if(index == size){
 		if(curr_sum == target){
+			
 			for(int i =0; i < sub_size; i++){
 				printf("%d", subset[i]);
 				if(i != sub_size - 1)
@@ -39,6 +40,7 @@ void solve(int *nums, int size, int target, int *subset, int index, int sub_size
 }
 
 int main(int ac, char **av){
+	// check if everything is integer or not
 	if(ac > 3 || check_int(av, ac)){
 		int target = atoi(av[1]);
 		int *nums = malloc(sizeof(int) * (ac - 2));
