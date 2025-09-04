@@ -1,5 +1,9 @@
 #include <stdio.h>
 
+
+
+// dry run with this rip("( ( ) ( ( ) (", 3, 0, 0)
+
 int is_val(char *str)
 {
     int opened = 0, closed = 0;
