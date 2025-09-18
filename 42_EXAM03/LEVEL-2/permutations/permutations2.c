@@ -25,6 +25,7 @@ void perm(char *str , char *result , int *used, int dep, int len)
 		write(1,"\n",1);
 		return;
 	}
+	
 	for (int i = 0; i < len; i++)
 	{
 		if (used[i]) 

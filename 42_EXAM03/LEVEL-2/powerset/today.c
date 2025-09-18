@@ -57,6 +57,5 @@ int main(int ac, char ** av){
         free(nums);
         return 0;
     }
-    printf("hello\n");
     return 1;
 }

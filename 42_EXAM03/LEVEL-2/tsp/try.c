@@ -5,7 +5,8 @@
 typedef struct { float x,y; } P;
 
 float d(P a,P b){
-    float dx=a.x-b.x,dy=a.y-b.y;
+    float dx= a.x-b.x,
+    float dy=a.y-b.y;
     return sqrtf(dx*dx+dy*dy);
 }
 
@@ -32,7 +33,8 @@ void tsp(P*p,int*n,int l,int r,float*best,int N){
 }
 
 int main(){
-    P p[11]; int N=0;
+    P p[11]; 
+    int N=0;
     while(scanf("%f, %f",&p[N].x,&p[N].y)==2)
         N++;
     int n[11]; 

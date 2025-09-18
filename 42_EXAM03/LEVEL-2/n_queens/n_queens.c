@@ -2,13 +2,20 @@
 #include <stdlib.h>
 #include <stdio.h>
 
+
+
+// this applies 3 condition:
+// 1. if the row is same 
+// 2. R-C  // negative diagonal
+// 3. R+C // positive diagonal
+
 int is_safe(int *positions, int current_col, int current_row)
 {
 	for (int prev_col = 0; prev_col < current_col; prev_col++)
 	{
 		int prev_row = positions[prev_col];
 		if (prev_row == current_row ||
-			prev_row - prev_col == current_row - current_col ||
+			prev_row - prev_col == current_row - current_col || 
 			prev_row + prev_col == current_row + current_col)
 			return 0;
 	}
@@ -22,7 +29,7 @@ void solve(int *positions, int col, int n)
 	   for (int i = 0; i < n; i++)
 		{
 			if (i > 0)
-				printf(" ");
+				printf("_");
 			printf("%d", positions[i]);
 		}
 		printf("\n");

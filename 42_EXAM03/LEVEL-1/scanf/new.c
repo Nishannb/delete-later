@@ -23,16 +23,16 @@ int match_char(FILE *f, char c) {
     return 0;
 }
 
-int scan_char(FILE *f, va_list ap) {
+int scan_char(FILE *f, va_list *ap) {
     int c = fgetc(f);
     if (c == EOF)
         return -1;
-    char *ptr = va_arg(ap, char*);
+    char *ptr = va_arg(*ap, char*);
     *ptr = c;
     return 1;
 }
 
-int scan_int(FILE *f, va_list ap) {
+int scan_int(FILE *f, va_list *ap) {
     int sign = 1;
     int digit_scaned = 0;
     int c = fgetc(f);
@@ -53,13 +53,13 @@ int scan_int(FILE *f, va_list ap) {
         ungetc(c, f);
     if (digit_scaned == 0)
         return 0;
-    int *ptr = va_arg(ap, int*);
+    int *ptr = va_arg(*ap, int*);
     *ptr = r * sign;
     return 1;
 }
 
-int scan_string(FILE *f, va_list ap) {
-    char *str = va_arg(ap, char*);
+int scan_string(FILE *f, va_list *ap) {
+    char *str = va_arg(*ap, char*);
     int c = fgetc(f);
     int chars_scaned = 0;
 
@@ -71,12 +71,10 @@ int scan_string(FILE *f, va_list ap) {
     if (c != EOF)
         ungetc(c, f);
     str[chars_scaned] = '\0';
-    if (chars_scaned == 0)
-        return 0;
     return 1;
 }
 
-int match_conv(FILE *f, const char **format, va_list ap) {
+int match_conv(FILE *f, const char **format, va_list *ap) {
     switch (**format) {
         case 'c':
             return scan_char(f, ap);
@@ -89,7 +87,7 @@ int match_conv(FILE *f, const char **format, va_list ap) {
     }
 }
 
-int ft_vfscanf(FILE *f, const char *format, va_list ap) {
+int ft_vfscanf(FILE *f, const char *format, va_list *ap) {
     int nconv = 0;
     int ret;
 
@@ -127,18 +125,36 @@ int ft_vfscanf(FILE *f, const char *format, va_list ap) {
 int ft_scanf(const char *format, ...) {
     va_list ap;
     va_start(ap, format);
-    int ret = ft_vfscanf(stdin, format, ap);
+    int ret = ft_vfscanf(stdin, format, &ap);
     va_end(ap);
     return ret;
 }
 
-#include <stdio.h>
-
-int main() {
-    int x, y;
-    printf("Enter two numbers: ");
-    scanf("%d %d", &x, &y);
-    printf("You entered: %d and %d\n", x, y);
+int main(void) {
+    int num;
+    char str[100];
+    char ch;
+    
+    printf("Testing ft_scanf:\n");
+    printf("Enter an integer, a string, and a character (e.g., '42 hello x'): ");
+    
+    int result = ft_scanf("%d %s %c", &num, str, &ch);
+    
+    printf("ft_scanf returned: %d\n", result);
+    printf("Values read:\n");
+    printf("  Integer: %d (address: %p)\n", num, (void*)&num);
+    printf("  String: '%s' (address: %p)\n", str, (void*)str);
+    printf("  Character: '%c' (address: %p)\n", ch, (void*)&ch);
+    
+    if (result == 3) {
+        printf("Successfully read %d items!\n", result);
+    } else if (result > 0) {
+        printf("Partially successful: read %d items\n", result);
+    } else if (result == 0) {
+        printf("No conversions were performed\n");
+    } else {
+        printf("Error occurred during scanning\n");
+    }
+    
     return 0;
 }
-

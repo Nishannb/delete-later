@@ -114,5 +114,6 @@ int        main(int ac, char **av)
     tsp(0, 0, 0);//
     printf("%.2f\n", best_distance);//
     free(array);
+    free(visited);
     return (0);
 }
