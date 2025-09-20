@@ -66,11 +66,11 @@ int    str_append_mem(char **s1, char *s2, size_t size2)
         return (0);
 
     if(*s1) {
-        ft_memcpy(new_str, *s1, s1_len);
+        ft_memcpy(new_str, *s1, s1_len); //copy first text
         free(*s1);
     }
 
-    ft_memcpy(new_str + s1_len, s2, size2);
+    ft_memcpy(new_str + s1_len, s2, size2); // copy second text
     new_str[s1_len + size2] = '\0';
 
     *s1 = new_str;

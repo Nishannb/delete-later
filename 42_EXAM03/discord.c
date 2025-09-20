@@ -54,8 +54,8 @@ int	main(int argc, char **argv)
 		}
 		if (bytes_read == 0)
 			break ;
-		if (input_buffer[total_size] == '\n')
-			continue ;
+		// if (input_buffer[total_size] == '\n')
+		// 	continue ;
 		total_size += bytes_read;
 	}
 	for (size_t i = 0; i < total_size; )
